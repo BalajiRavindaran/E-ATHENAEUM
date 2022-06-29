@@ -114,7 +114,7 @@ namespace E___ATHENAEUM
                     }
                     genres = genres.Remove(genres.Length - 1);
 
-                    string filepath = "~/books/books1";
+                    string filepath = "~/books/inventory-soft";
                     string filename = Path.GetFileName(FileUpload1.PostedFile.FileName);
                     if (filename == "" || filename == null)
                     {
@@ -298,7 +298,7 @@ namespace E___ATHENAEUM
             }
             genres = genres.Remove(genres.Length - 1);
 
-            string filepath = "~/books/books1.png";
+            string filepath = "~/books/inventory-soft.png";
             string filename = Path.GetFileName(FileUpload1.PostedFile.FileName);
             FileUpload1.SaveAs(Server.MapPath("books/" + filename));
             filepath = "~/books/" + filename;

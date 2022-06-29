@@ -11,6 +11,39 @@
     </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab&display=swap" rel="stylesheet">
+
+    <style>
+
+        body {
+            margin: 0;
+            font-family: "Source Sans Pro", sans-serif;
+            min-height: 100vh;
+            display: grid;
+            background: #1a1c1d;
+            color: #ffffff;
+            font-family: 'Roboto Slab', serif;
+        }
+
+        h2 {
+            font-size: 3.1vw;
+            font-weight: normal;
+        }
+
+        h3, h4, h5, h6 {
+            font-size: 2.1vw;
+            color: #22bb45;
+        }
+
+        label, span {
+            color: #000000;
+        }
+
+    </style>
+
     <br />
     <div class="container-fluid">
         <div class="row">
@@ -22,7 +55,7 @@
                         <div class="row">
                             <div class="col">
                                 <center>
-                                    <img src="images/writer.png" width="100px"/>
+                                    <img src="images/round-table.png" width="100px"/>
                                 </center>
                             </div>
                         </div>
@@ -30,7 +63,7 @@
                         <div class="row">
                             <div class="col">
                                 <center>
-                                    <h4>Author Details</h4>
+                                    <h3>Author Details</h3>
                                 </center>
                             </div>
                         </div>
@@ -102,10 +135,10 @@
                         <div class="row">
                             <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:eathenaeumDBConnectionString %>" SelectCommand="SELECT * FROM [author_tbl]"></asp:SqlDataSource>
                             <div class="col">
-                                <asp:GridView CssClass="table table-striped table-bordered" ID="GridView1" runat="server" AutoGenerateColumns="False" DataKeyNames="author_id" DataSourceID="SqlDataSource1">
+                                <asp:GridView CssClass="table table-striped table-bordered" ID="GridView1" runat="server" AutoGenerateColumns="False" DataKeyNames="author_id" DataSourceID="SqlDataSource1" OnSelectedIndexChanged="GridView1_SelectedIndexChanged">
                                     <Columns>
-                                        <asp:BoundField DataField="author_id" HeaderText="author_id" ReadOnly="True" SortExpression="author_id" />
-                                        <asp:BoundField DataField="author_name" HeaderText="author_name" SortExpression="author_name" />
+                                        <asp:BoundField DataField="author_id" HeaderText="ID" ReadOnly="True" SortExpression="author_id" />
+                                        <asp:BoundField DataField="author_name" HeaderText="Name" SortExpression="author_name" />
                                     </Columns>
                                 </asp:GridView>
                             </div>

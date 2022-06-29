@@ -199,5 +199,10 @@ namespace E___ATHENAEUM
             TextBox1.Text = "";
             TextBox2.Text = "";
         }
+
+        protected void GridView1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

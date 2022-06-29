@@ -5,7 +5,9 @@
 <html>
 <head runat="server">
     <title></title>
-    
+    <%--our custom css--%>
+    <link href="css/customStyleSheet.css" rel="stylesheet" />
+
     <%--bootstrap css--%>
     <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" />
     <%--datatables css--%>
@@ -13,8 +15,6 @@
     <%--fontawesome css--%>
     <link href="fontawesome/css/all.css" rel="stylesheet" />
 
-    <%--our custom css--%>
-    <link href="css/customStyleSheet.css" rel="stylesheet" />
 
     <%--jquery--%>
     <script src="bootstrap/js/jquery-3.3.1.slim.min.js"></script>
@@ -25,6 +25,12 @@
     <%--datatables js--%>
     <script src="datatables/js/jquery.dataTables.min.js"></script>
 
+    <style>
+        .navbar{
+            place-content: right;
+            text-align: right;
+        }
+    </style>
 
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
@@ -33,30 +39,18 @@
     <form id="form1" runat="server">
         
         <div>
-            <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-                <a class="navbar-brand" href="#">
-                    <img src="images/books.png" width="30" height="30" />
+            <nav class="navbar navbar-dark bg-dark">
+                <a class="navbar-brand nav-link" href="Home.aspx">
                     E - ATHENAEUM
                 </a>
 
-                <button class="navbar-toggler collapsed d-flex d-lg-none flex-column justify-content-around" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <button class="navbar-toggler collapsed d-flex flex-column justify-content-around" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="toggler-icon top-bar"></span>
                     <span class="toggler-icon middle-bar"></span>
                     <span class="toggler-icon bottom-bar"></span>
                 </button>
 
                  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav mr-auto">
-                        <li class="nav-item active">
-                            <a class="nav-link" href="Home.aspx">Home</a>
-                        </li>
-                        <li class="nav-item active">
-                            <a class="nav-link" href="#">About Us</a>
-                        </li>
-                        <li class="nav-item active">
-                            <a class="nav-link" href="#">Terms</a>
-                        </li>
-                    </ul>
 
                     <ul class="navbar-nav">
                         <li class="nav-item active">
@@ -64,7 +58,7 @@
                         </li>
                         
                         <li class="nav-item active">
-                            <asp:LinkButton class="nav-link" ID="LinkButton1" runat="server" OnClick="LinkButton1_Click">User Login</asp:LinkButton>
+                            <asp:LinkButton class="nav-link" ID="LinkButton1" runat="server" OnClick="LinkButton1_Click">Member Login</asp:LinkButton>
                         </li>
 
                         <li class="nav-item active">

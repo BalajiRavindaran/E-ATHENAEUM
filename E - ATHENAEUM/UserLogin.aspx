@@ -2,6 +2,35 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab&display=swap" rel="stylesheet">
+
+    <style>
+
+        body {
+            margin: 0;
+            font-family: "Source Sans Pro", sans-serif;
+            min-height: 100vh;
+            display: grid;
+            background: #1a1c1d;
+            color: #ffffff;
+            font-family: 'Roboto Slab', serif;
+        }
+
+        h2 {
+            font-size: 3.1vw;
+            font-weight: normal;
+        }
+
+        h3, h4, h5, h6 {
+            font-size: 2.1vw;
+            color: #22bb45;
+        }
+
+    </style>
+
     <br />
     <div class="container">
         <div class="row">
@@ -13,7 +42,7 @@
                         <div class="row">
                             <div class="col">
                                 <center>
-                                    <img src="images/generaluser.png" width="150px"/>
+                                    <img src="images/millennial.png" width="150px"/>
                                 </center>
                             </div>
                         </div>
