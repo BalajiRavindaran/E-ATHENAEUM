@@ -22,13 +22,13 @@ namespace E___ATHENAEUM
         // add
         protected void Button2_Click(object sender, EventArgs e)
         {
-            if(checkAuthorExists())
+            if (checkAuthorExists())
             {
                 Response.Write("<script>alert('Author already exist');</script>");
             }
             else
             {
-                addAuthor();
+                validations();
             }
         }
         // update
@@ -86,7 +86,7 @@ namespace E___ATHENAEUM
             catch (Exception exception)
             {
                 Response.Write("<script>alert('" + exception.Message + "');</script>");
-                
+
             }
         }
 
@@ -116,27 +116,35 @@ namespace E___ATHENAEUM
 
         void updateAuthor()
         {
-            try
+            if (TextBox2.Text.Trim() == null || TextBox2.Text.Trim() == "")
             {
-                SqlConnection con = new SqlConnection(strCon);
-                if (con.State == ConnectionState.Closed)
+                Response.Write("<script>alert('Author Name cannot be empty');</script>");
+            }
+            else
+            {
+                try
                 {
-                    con.Open();
+                    SqlConnection con = new SqlConnection(strCon);
+                    if (con.State == ConnectionState.Closed)
+                    {
+                        con.Open();
+                    }
+                    SqlCommand cmd = new SqlCommand("UPDATE author_tbl SET author_name=@author_name WHERE author_id='" + TextBox1.Text.Trim() + "' ", con);
+                    cmd.Parameters.AddWithValue("@author_name", TextBox2.Text.Trim());
+
+                    cmd.ExecuteNonQuery();
+                    con.Close();
+
+                    Response.Write("<script>alert('Author Updated Successfully');</script>");
+                    clearForm();
+                    GridView1.DataBind();
                 }
-                SqlCommand cmd = new SqlCommand("UPDATE author_tbl SET author_name=@author_name WHERE author_id='" + TextBox1.Text.Trim() +"' ", con);
-                cmd.Parameters.AddWithValue("@author_name", TextBox2.Text.Trim());
-
-                cmd.ExecuteNonQuery();
-                con.Close();
-
-                Response.Write("<script>alert('Author Updated Successfully');</script>");
-                clearForm();
-                GridView1.DataBind();
+                catch (Exception exception)
+                {
+                    Response.Write("<script>alert('" + exception.Message + "');</script>");
+                }
             }
-            catch (Exception exception)
-            {
-                Response.Write("<script>alert('" + exception.Message + "');</script>");
-            }
+
         }
 
         void addAuthor()
@@ -203,6 +211,24 @@ namespace E___ATHENAEUM
         protected void GridView1_SelectedIndexChanged(object sender, EventArgs e)
         {
 
+        }
+
+        void validations()
+        {
+            if (TextBox1.Text.Trim() == null || TextBox1.Text.Trim() == "")
+            {
+                Response.Write("<script>alert('Author ID cannot be empty');</script>");
+            }
+
+            else if (TextBox2.Text.Trim() == null || TextBox2.Text.Trim() == "")
+            {
+                Response.Write("<script>alert('Author Name cannot be empty');</script>");
+            }
+
+            else
+            {
+                addAuthor();
+            }
         }
     }
 }

@@ -27,7 +27,7 @@ namespace E___ATHENAEUM
             }
             else
             {
-                addPublisher();
+                validations();
             }
         }
         // update
@@ -115,27 +115,35 @@ namespace E___ATHENAEUM
 
         void updatePublisher()
         {
-            try
+            if (TextBox2.Text.Trim() == null || TextBox2.Text.Trim() == "")
             {
-                SqlConnection con = new SqlConnection(strCon);
-                if (con.State == ConnectionState.Closed)
+                Response.Write("<script>alert('Publisher Name cannot be empty');</script>");
+            }
+            else
+            {
+                try
                 {
-                    con.Open();
+                    SqlConnection con = new SqlConnection(strCon);
+                    if (con.State == ConnectionState.Closed)
+                    {
+                        con.Open();
+                    }
+                    SqlCommand cmd = new SqlCommand("UPDATE publisher_tbl SET publisher_name=@publisher_name WHERE publisher_id='" + TextBox1.Text.Trim() + "' ", con);
+                    cmd.Parameters.AddWithValue("@publisher_name", TextBox2.Text.Trim());
+
+                    cmd.ExecuteNonQuery();
+                    con.Close();
+
+                    Response.Write("<script>alert('Publisher Updated Successfully');</script>");
+                    clearForm();
+                    GridView1.DataBind();
                 }
-                SqlCommand cmd = new SqlCommand("UPDATE publisher_tbl SET publisher_name=@publisher_name WHERE publisher_id='" + TextBox1.Text.Trim() + "' ", con);
-                cmd.Parameters.AddWithValue("@publisher_name", TextBox2.Text.Trim());
-
-                cmd.ExecuteNonQuery();
-                con.Close();
-
-                Response.Write("<script>alert('Publisher Updated Successfully');</script>");
-                clearForm();
-                GridView1.DataBind();
+                catch (Exception exception)
+                {
+                    Response.Write("<script>alert('" + exception.Message + "');</script>");
+                }
             }
-            catch (Exception exception)
-            {
-                Response.Write("<script>alert('" + exception.Message + "');</script>");
-            }
+
         }
 
         void addPublisher()
@@ -202,6 +210,24 @@ namespace E___ATHENAEUM
         protected void GridView1_SelectedIndexChanged(object sender, EventArgs e)
         {
 
+        }
+
+        void validations()
+        {
+            if (TextBox1.Text.Trim() == null || TextBox1.Text.Trim() == "")
+            {
+                Response.Write("<script>alert('Publisher ID cannot be empty');</script>");
+            }
+
+            else if (TextBox2.Text.Trim() == null || TextBox2.Text.Trim() == "")
+            {
+                Response.Write("<script>alert('Publisher Name cannot be empty');</script>");
+            }
+
+            else
+            {
+                addPublisher();
+            }
         }
     }
 }

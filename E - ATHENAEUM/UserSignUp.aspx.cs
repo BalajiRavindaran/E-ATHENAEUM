@@ -25,7 +25,7 @@ namespace E___ATHENAEUM
             {
                 Response.Write("<script>alert('Member Already Exist with this Member ID, try other ID');</script>");
             }
-            else NewUserSignUp();
+            else validation();
         }
 
         bool checkMemberExists()
@@ -87,6 +87,54 @@ namespace E___ATHENAEUM
             catch (Exception exception)
             {
                 Response.Write("<script>alert('" + exception.Message + "');</script>");
+            }
+        }
+
+        void validation()
+        {
+            if (TextBox1.Text.Trim() == null || TextBox1.Text.Trim()=="")
+            {
+                Response.Write("<script>alert('Full Name cannot be empty');</script>");
+            }
+            else if (TextBox2.Text.Trim() == null || TextBox2.Text.Trim() == "")
+            {
+                Response.Write("<script>alert('DOB cannot be empty');</script>");
+            }
+            else if (TextBox3.Text.Trim() == null || TextBox3.Text.Trim() == "")
+            {
+                Response.Write("<script>alert('Contact Number cannot be empty');</script>");
+            }
+            else if (TextBox4.Text.Trim() == null || TextBox4.Text.Trim() == "")
+            {
+                Response.Write("<script>alert('Email cannot be empty');</script>");
+            }
+            else if (TextBox5.Text.Trim() == null || TextBox5.Text.Trim() == "")
+            {
+                Response.Write("<script>alert('City cannot be empty');</script>");
+            }
+            else if (TextBox6.Text.Trim() == null || TextBox6.Text.Trim() == "")
+            {
+                Response.Write("<script>alert('Pincode cannot be empty');</script>");
+            }
+            else if (TextBox7.Text.Trim() == null || TextBox7.Text.Trim() == "")
+            {
+                Response.Write("<script>alert('Full Address cannot be empty');</script>");
+            }
+            else if (TextBox8.Text.Trim() == null || TextBox8.Text.Trim() == "")
+            {
+                Response.Write("<script>alert('Member ID cannot be empty');</script>");
+            }
+            else if (TextBox9.Text.Trim() == null || TextBox9.Text.Trim() == "")
+            {
+                Response.Write("<script>alert('Password cannot be empty');</script>");
+            }
+            else if (DropDownList1.SelectedItem.Value== "Select")
+            {
+                Response.Write("<script>alert('Select your appropriate state');</script>");
+            }
+            else
+            {
+                NewUserSignUp();
             }
         }
     }
