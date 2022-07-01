@@ -24,7 +24,9 @@ namespace E___ATHENAEUM
         {
             if (checkAuthorExists())
             {
-                Response.Write("<script>alert('Author already exist');</script>");
+                Label1.Visible = true;
+                Label1.ForeColor = System.Drawing.Color.Red;
+                Label1.Text = "Author already exist";
             }
             else
             {
@@ -40,7 +42,9 @@ namespace E___ATHENAEUM
             }
             else
             {
-                Response.Write("<script>alert('Author does not exist');</script>");
+                Label1.Visible = true;
+                Label1.ForeColor = System.Drawing.Color.Red;
+                Label1.Text = "Author does not exist";
             }
         }
         // delete
@@ -52,7 +56,9 @@ namespace E___ATHENAEUM
             }
             else
             {
-                Response.Write("<script>alert('Author does not exist');</script>");
+                Label1.Visible = true;
+                Label1.ForeColor = System.Drawing.Color.Red;
+                Label1.Text = "Author does not exist";
             }
         }
         // go
@@ -80,7 +86,9 @@ namespace E___ATHENAEUM
                 }
                 else
                 {
-                    Response.Write("<script>alert('Invalid Author ID');</script>");
+                    Label1.Visible = true;
+                    Label1.ForeColor = System.Drawing.Color.Red;
+                    Label1.Text = "Invalid Author ID";
                 }
             }
             catch (Exception exception)
@@ -104,7 +112,10 @@ namespace E___ATHENAEUM
                 cmd.ExecuteNonQuery();
                 con.Close();
 
-                Response.Write("<script>alert('Author deleted Successfully');</script>");
+                Label1.Visible = true;
+                Label1.ForeColor = System.Drawing.Color.Green;
+                Label1.Text = "Author deleted Successfully";
+
                 clearForm();
                 GridView1.DataBind();
             }
@@ -118,7 +129,9 @@ namespace E___ATHENAEUM
         {
             if (TextBox2.Text.Trim() == null || TextBox2.Text.Trim() == "")
             {
-                Response.Write("<script>alert('Author Name cannot be empty');</script>");
+                Label1.Visible = true;
+                Label1.ForeColor = System.Drawing.Color.Red;
+                Label1.Text = "Author Name cannot be empty";
             }
             else
             {
@@ -135,7 +148,10 @@ namespace E___ATHENAEUM
                     cmd.ExecuteNonQuery();
                     con.Close();
 
-                    Response.Write("<script>alert('Author Updated Successfully');</script>");
+                    Label1.Visible = true;
+                    Label1.ForeColor = System.Drawing.Color.Green;
+                    Label1.Text = "Author Updated Successfully";
+
                     clearForm();
                     GridView1.DataBind();
                 }
@@ -163,7 +179,10 @@ namespace E___ATHENAEUM
                 cmd.ExecuteNonQuery();
                 con.Close();
 
-                Response.Write("<script>alert('Author Added Successfully');</script>");
+                Label1.Visible = true;
+                Label1.ForeColor = System.Drawing.Color.Green;
+                Label1.Text = "Author Added Successfully";
+
                 clearForm();
                 GridView1.DataBind();
             }
@@ -217,12 +236,16 @@ namespace E___ATHENAEUM
         {
             if (TextBox1.Text.Trim() == null || TextBox1.Text.Trim() == "")
             {
-                Response.Write("<script>alert('Author ID cannot be empty');</script>");
+                Label1.Visible = true;
+                Label1.ForeColor = System.Drawing.Color.Red;
+                Label1.Text = "Author ID cannot be empty";
             }
 
             else if (TextBox2.Text.Trim() == null || TextBox2.Text.Trim() == "")
             {
-                Response.Write("<script>alert('Author Name cannot be empty');</script>");
+                Label1.Visible = true;
+                Label1.ForeColor = System.Drawing.Color.Red;
+                Label1.Text = "Author Name cannot be empty";
             }
 
             else

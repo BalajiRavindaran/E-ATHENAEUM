@@ -23,7 +23,9 @@ namespace E___ATHENAEUM
         {
             if (checkMemberExists())
             {
-                Response.Write("<script>alert('Member Already Exist with this Member ID, try other ID');</script>");
+                Label1.Visible = true;
+                Label1.Text = "Member Already Exist with this Member ID, try other ID";
+                Label1.ForeColor = System.Drawing.Color.Red;
             }
             else validation();
         }
@@ -82,7 +84,9 @@ namespace E___ATHENAEUM
                 cmd.ExecuteNonQuery();
                 con.Close();
 
-                Response.Write("<script>alert('Sign Up Successful. Go to User Login to Login');</script>");
+                Label1.Visible = true;
+                Label1.Text = "Sign Up Successful. Go to User Login to Login";
+                Label1.ForeColor = System.Drawing.Color.Green;
             }
             catch (Exception exception)
             {
@@ -92,45 +96,76 @@ namespace E___ATHENAEUM
 
         void validation()
         {
+            bool containsInt = TextBox9.Text.Trim().Any(char.IsDigit);
+            var specialCharacters = new List<string> { "~", "'", "!", "@", "#", "$", "%", "^", "&", "*", "(", ")", "-", "_", "+", "=", "{", "}", "[", "]", "|", "/", "?", "<", ">" };
+            bool containsSpecialCharacters = specialCharacters.Any(TextBox9.Text.Trim().Contains);
+
+
             if (TextBox1.Text.Trim() == null || TextBox1.Text.Trim()=="")
             {
-                Response.Write("<script>alert('Full Name cannot be empty');</script>");
+                Label1.Visible = true;
+                Label1.Text = "Full Name cannot be empty";
+                Label1.ForeColor = System.Drawing.Color.Red;
             }
             else if (TextBox2.Text.Trim() == null || TextBox2.Text.Trim() == "")
             {
-                Response.Write("<script>alert('DOB cannot be empty');</script>");
+                Label1.Visible = true;
+                Label1.Text = "DOB cannot be empty";
+                Label1.ForeColor = System.Drawing.Color.Red;
             }
             else if (TextBox3.Text.Trim() == null || TextBox3.Text.Trim() == "")
             {
-                Response.Write("<script>alert('Contact Number cannot be empty');</script>");
+                Label1.Visible = true;
+                Label1.Text = "Contact Number cannot be empty";
+                Label1.ForeColor = System.Drawing.Color.Red;
             }
             else if (TextBox4.Text.Trim() == null || TextBox4.Text.Trim() == "")
             {
-                Response.Write("<script>alert('Email cannot be empty');</script>");
+                Label1.Visible = true;
+                Label1.Text = "Email cannot be empty";
+                Label1.ForeColor = System.Drawing.Color.Red;
             }
             else if (TextBox5.Text.Trim() == null || TextBox5.Text.Trim() == "")
             {
-                Response.Write("<script>alert('City cannot be empty');</script>");
+                Label1.Visible = true;
+                Label1.Text = "City cannot be empty";
+                Label1.ForeColor = System.Drawing.Color.Red;
             }
             else if (TextBox6.Text.Trim() == null || TextBox6.Text.Trim() == "")
             {
-                Response.Write("<script>alert('Pincode cannot be empty');</script>");
+                Label1.Visible = true;
+                Label1.Text = "Pincode cannot be empty";
+                Label1.ForeColor = System.Drawing.Color.Red;
             }
             else if (TextBox7.Text.Trim() == null || TextBox7.Text.Trim() == "")
             {
-                Response.Write("<script>alert('Full Address cannot be empty');</script>");
+                Label1.Visible = true;
+                Label1.Text = "Full Address cannot be empty";
+                Label1.ForeColor = System.Drawing.Color.Red;
             }
             else if (TextBox8.Text.Trim() == null || TextBox8.Text.Trim() == "")
             {
-                Response.Write("<script>alert('Member ID cannot be empty');</script>");
+                Label1.Visible = true;
+                Label1.Text = "Member ID cannot be empty";
+                Label1.ForeColor = System.Drawing.Color.Red;
             }
             else if (TextBox9.Text.Trim() == null || TextBox9.Text.Trim() == "")
             {
-                Response.Write("<script>alert('Password cannot be empty');</script>");
+                Label1.Visible = true;
+                Label1.Text = "Password cannot be empty";
+                Label1.ForeColor = System.Drawing.Color.Red;
             }
             else if (DropDownList1.SelectedItem.Value== "Select")
             {
-                Response.Write("<script>alert('Select your appropriate state');</script>");
+                Label1.Visible = true;
+                Label1.Text = "Select your appropriate state";
+                Label1.ForeColor = System.Drawing.Color.Red;
+            }
+            else if(TextBox9.Text.Trim().Length<8 || containsInt==false || containsSpecialCharacters==false)
+            {
+                Label1.Visible = true;
+                Label1.Text = "Password too weak";
+                Label1.ForeColor = System.Drawing.Color.Red;
             }
             else
             {

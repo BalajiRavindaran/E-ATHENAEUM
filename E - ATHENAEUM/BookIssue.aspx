@@ -1,4 +1,5 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site1.Master" AutoEventWireup="true" CodeBehind="BookIssue.aspx.cs" Inherits="E___ATHENAEUM.Issue" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <script type="text/javascript">
         $(document).ready(function () {
@@ -17,7 +18,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab&display=swap" rel="stylesheet">
 
     <style>
-
         body {
             margin: 0;
             font-family: "Source Sans Pro", sans-serif;
@@ -42,6 +42,15 @@
             color: #000000;
         }
 
+        .blink {
+            animation: blinker 1.5s linear infinite;
+        }
+
+        @keyframes blinker {
+            50% {
+                opacity: 0;
+            }
+        }
     </style>
 
     <br />
@@ -51,11 +60,11 @@
 
                 <div class="card">
                     <div class="card-body">
-                        
+
                         <div class="row">
                             <div class="col">
                                 <center>
-                                    <img src="images/hand-over.png" width="100px"/>
+                                    <img src="images/hand-over.png" width="100px" />
                                 </center>
                             </div>
                         </div>
@@ -82,13 +91,13 @@
                                     <asp:TextBox CssClass="form-control" ID="TextBox2" runat="server" placeholder="Member ID"></asp:TextBox>
                                 </div>
                             </div>
-                            
+
                             <div class="col-md-6">
                                 <label>Book ID</label>
                                 <div class="form-group">
                                     <div class="input-group">
                                         <asp:TextBox CssClass="form-control" ID="TextBox1" runat="server" placeholder="Book ID"></asp:TextBox>
-                                        <asp:LinkButton  CssClass="btn btn-primary ml-1" ID="LinkButton4" runat="server" OnClick="LinkButton4_Click"><i class="fas fa-angle-right"></i></asp:LinkButton>
+                                        <asp:LinkButton CssClass="btn btn-primary ml-1" ID="LinkButton4" runat="server" OnClick="LinkButton4_Click"><i class="fas fa-angle-right"></i></asp:LinkButton>
                                     </div>
                                 </div>
                             </div>
@@ -113,7 +122,7 @@
                             <div class="col-md-6">
                                 <label>Start Date</label>
                                 <div class="form-group">
-                                    <asp:TextBox CssClass="form-control" ID="TextBox5" runat="server" placeholder="dd-mm-yyyy" TextMode="Date"></asp:TextBox>
+                                    <asp:TextBox CssClass="form-control" ID="TextBox5" runat="server" placeholder="dd-mm-yyyy" TextMode="Date" ReadOnly="True"></asp:TextBox>
                                 </div>
                             </div>
                             <div class="col-md-6">
@@ -123,6 +132,13 @@
                                 </div>
                             </div>
                         </div>
+
+                        <br />
+                        <center>
+                            <asp:Label ID="Label1" CssClass="blink" runat="server" Text="Label" Visible="False"></asp:Label>
+                        </center>
+                        <br />
+
 
                         <div class="row">
                             <div class="col-6">
@@ -135,10 +151,11 @@
 
                     </div>
                 </div>
-                
+
                 <br />
-                <a class="btn btn-primary" href="Home.aspx"><i class="fas fa-angle-left"></i> <i class="fa fa-home"></i></a>
-                <br /><br />
+                <a class="btn btn-primary" href="Home.aspx"><i class="fas fa-angle-left"></i><i class="fa fa-home"></i></a>
+                <br />
+                <br />
 
             </div>
 
@@ -159,7 +176,7 @@
                                 <hr />
                             </div>
                         </div>
-                            
+
                         <div class="row">
                             <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:eathenaeumDBConnectionString %>" SelectCommand="SELECT * FROM [book_issue_tbl]"></asp:SqlDataSource>
                             <div class="col">

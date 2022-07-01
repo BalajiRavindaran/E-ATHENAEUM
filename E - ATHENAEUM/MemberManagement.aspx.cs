@@ -75,7 +75,9 @@ namespace E___ATHENAEUM
                     }
                     else
                     {
-                        Response.Write("<script>alert('Invalid member ID');</script>");
+                        Label1.Visible = true;
+                        Label1.Text = "Invalid member ID";
+                        Label1.ForeColor = System.Drawing.Color.Red;
                     }
                 }
                 catch (Exception exception)
@@ -85,7 +87,9 @@ namespace E___ATHENAEUM
             }
             else
             {
-                Response.Write("<script>alert('Invalid Member ID');</script>");
+                Label1.Visible = true;
+                Label1.Text = "Invalid member ID";
+                Label1.ForeColor = System.Drawing.Color.Red;
             }
         }
 
@@ -105,7 +109,10 @@ namespace E___ATHENAEUM
                     con.Close();
                     GridView1.DataBind();
                     TextBox7.Text = str;
-                    Response.Write("<script>alert('Status Updated Successfully');</script>");
+
+                    Label1.Visible = true;
+                    Label1.Text = "Status Updated Successfully";
+                    Label1.ForeColor = System.Drawing.Color.Green;
 
                 }
                 catch (Exception exception)
@@ -115,7 +122,9 @@ namespace E___ATHENAEUM
             }
             else
             {
-                Response.Write("<script>alert('Invalid Member ID');</script>");
+                Label1.Visible = true;
+                Label1.Text = "Invalid member ID";
+                Label1.ForeColor = System.Drawing.Color.Red;
             }
         }
 
@@ -164,7 +173,10 @@ namespace E___ATHENAEUM
                     cmd.ExecuteNonQuery();
                     con.Close();
 
-                    Response.Write("<script>alert('Member deleted Successfully');</script>");
+                    Label1.Visible = true;
+                    Label1.Text = "Member deleted Successfully";
+                    Label1.ForeColor = System.Drawing.Color.Green;
+
                     clearForm();
                     GridView1.DataBind();
                 }
@@ -175,7 +187,9 @@ namespace E___ATHENAEUM
             }
             else
             {
-                Response.Write("<script>alert('Invalid Member ID');</script>");
+                Label1.Visible = true;
+                Label1.Text = "Invalid member ID";
+                Label1.ForeColor = System.Drawing.Color.Red;
             }
         }
 

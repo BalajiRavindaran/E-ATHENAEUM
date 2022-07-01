@@ -17,6 +17,9 @@ namespace E___ATHENAEUM
         protected void Page_Load(object sender, EventArgs e)
         {
             GridView1.DataBind();
+            TextBox5.Text = DateTime.Now.ToString("yyyy-MM-dd");
+            DateTime DueDate = DateTime.ParseExact(TextBox5.Text, "yyyy-MM-dd", System.Globalization.CultureInfo.InvariantCulture);
+            TextBox6.Text = DueDate.AddDays(7).ToString("yyyy-MM-dd");
         }
 
         // go
@@ -29,17 +32,30 @@ namespace E___ATHENAEUM
         {
             if (checkIssueExist())
             {
-                Response.Write("<script>alert('Member already has this book');</script>");
+                Label1.Visible = true;
+                Label1.ForeColor = System.Drawing.Color.Red;
+                Label1.Text = "Member already has this book";
             }
             else
             {
-                if (checkBookExist() && checkMemberExist())
+                if (checkBookExist())
                 {
-                    issueBook();
+                    if (checkMemberExist())
+                    {
+                        issueBook();
+                    }
+                    else
+                    {
+                        Label1.Visible = true;
+                        Label1.ForeColor = System.Drawing.Color.Red;
+                        Label1.Text = "Invalid Member ID";
+                    }
                 }
                 else
                 {
-                    Response.Write("<script>alert('Invalid Book ID or Member ID');</script>");
+                    Label1.Visible = true;
+                    Label1.ForeColor = System.Drawing.Color.Red;
+                    Label1.Text = "Invalid Book ID";
                 }
             }
 
@@ -55,12 +71,16 @@ namespace E___ATHENAEUM
                 }
                 else
                 {
-                    Response.Write("<script>alert('Invalid Book ID or Member ID');</script>");
+                    Label1.Visible = true;
+                    Label1.ForeColor = System.Drawing.Color.Red;
+                    Label1.Text = "Invalid Book ID or Member ID";
                 }
             }
             else
             {
-                Response.Write("<script>alert('Entry does not exist');</script>");
+                Label1.Visible = true;
+                Label1.ForeColor = System.Drawing.Color.Red;
+                Label1.Text = "Entry does not exist";
             }
         }
 
@@ -84,14 +104,19 @@ namespace E___ATHENAEUM
                     cmd.ExecuteNonQuery();
                     con.Close();
 
-                    Response.Write("<script>alert('Book Returned Successfully');</script>");
+                    Label1.Visible = true;
+                    Label1.ForeColor = System.Drawing.Color.Green;
+                    Label1.Text = "Book Returned Successfully";
+
                     GridView1.DataBind();
 
                     con.Close();
                 }
                 else
                 {
-                    Response.Write("<script>alert('Error - Invalid details');</script>");
+                    Label1.Visible = true;
+                    Label1.ForeColor = System.Drawing.Color.Red;
+                    Label1.Text = "Error - Invalid details";
                 }
 
             }
@@ -103,34 +128,45 @@ namespace E___ATHENAEUM
 
         void issueBook()
         {
-            try
+            if (validateDate())
             {
-                SqlConnection con = new SqlConnection(strCon);
-                if (con.State == ConnectionState.Closed)
+                try
                 {
-                    con.Open();
+                    SqlConnection con = new SqlConnection(strCon);
+                    if (con.State == ConnectionState.Closed)
+                    {
+                        con.Open();
+                    }
+                    SqlCommand cmd = new SqlCommand("INSERT INTO book_issue_tbl(member_id,member_name,book_id,book_name,issue_date,due_date) VALUES(@member_id,@member_name,@book_id,@book_name,@issue_date,@due_date)", con);
+                    cmd.Parameters.AddWithValue("@member_id", TextBox2.Text.Trim());
+                    cmd.Parameters.AddWithValue("@member_name", TextBox3.Text.Trim());
+                    cmd.Parameters.AddWithValue("@book_id", TextBox1.Text.Trim());
+                    cmd.Parameters.AddWithValue("@book_name", TextBox4.Text.Trim());
+                    cmd.Parameters.AddWithValue("@issue_date", TextBox5.Text.Trim());
+                    cmd.Parameters.AddWithValue("@due_date", TextBox6.Text.Trim());
+
+                    cmd.ExecuteNonQuery();
+
+                    cmd = new SqlCommand("UPDATE book_tbl set current_stock = current_stock-1 WHERE book_id = '" + TextBox1.Text.Trim() + "';", con);
+                    cmd.ExecuteNonQuery();
+                    con.Close();
+
+                    Label1.Visible = true;
+                    Label1.ForeColor = System.Drawing.Color.Green;
+                    Label1.Text = "Book Issued Successfully";
+                    // clearForm();
+                    GridView1.DataBind();
                 }
-                SqlCommand cmd = new SqlCommand("INSERT INTO book_issue_tbl(member_id,member_name,book_id,book_name,issue_date,due_date) VALUES(@member_id,@member_name,@book_id,@book_name,@issue_date,@due_date)", con);
-                cmd.Parameters.AddWithValue("@member_id", TextBox2.Text.Trim());
-                cmd.Parameters.AddWithValue("@member_name", TextBox3.Text.Trim());
-                cmd.Parameters.AddWithValue("@book_id", TextBox1.Text.Trim());
-                cmd.Parameters.AddWithValue("@book_name", TextBox4.Text.Trim());
-                cmd.Parameters.AddWithValue("@issue_date", TextBox5.Text.Trim());
-                cmd.Parameters.AddWithValue("@due_date", TextBox6.Text.Trim());
-
-                cmd.ExecuteNonQuery();
-
-                cmd = new SqlCommand("UPDATE book_tbl set current_stock = current_stock-1 WHERE book_id = '" + TextBox1.Text.Trim() + "';", con);
-                cmd.ExecuteNonQuery();
-                con.Close();
-
-                Response.Write("<script>alert('Book Issued Successfully');</script>");
-                // clearForm();
-                GridView1.DataBind();
+                catch (Exception exception)
+                {
+                    Response.Write("<script>alert('" + exception.Message + "');</script>");
+                }
             }
-            catch (Exception exception)
+            else
             {
-                Response.Write("<script>alert('" + exception.Message + "');</script>");
+                Label1.Visible = true;
+                Label1.ForeColor = System.Drawing.Color.Red;
+                Label1.Text = "Assign Issue Date";
             }
         }
 
@@ -240,7 +276,10 @@ namespace E___ATHENAEUM
                 }
                 else
                 {
-                    Response.Write("<script>alert('Invalid Book ID');</script>");
+                    Label1.Visible = true;
+                    Label1.ForeColor = System.Drawing.Color.Red;
+                    Label1.Text = "Invalid Book ID";
+
                 }
 
                 cmd = new SqlCommand("SELECT full_name from member_tbl where member_id='" + TextBox2.Text.Trim() + "';", con);
@@ -253,7 +292,9 @@ namespace E___ATHENAEUM
                 }
                 else
                 {
-                    Response.Write("<script>alert('Invalid Member ID');</script>");
+                    Label1.Visible = true;
+                    Label1.ForeColor = System.Drawing.Color.Red;
+                    Label1.Text = "Invalid Member ID";
                 }
             }
             catch (Exception exception)
@@ -281,6 +322,18 @@ namespace E___ATHENAEUM
             catch (Exception exception)
             {
                 Response.Write("<script>alert('" + exception.Message + "');</script>");
+            }
+        }
+
+        bool validateDate()
+        {
+            if ((TextBox5.Text.Trim() == null || TextBox5.Text.Trim() == "") || (TextBox6.Text.Trim() == null || TextBox6.Text.Trim() == ""))
+            {
+                return false;
+            }
+            else
+            {
+                return true;
             }
         }
     }

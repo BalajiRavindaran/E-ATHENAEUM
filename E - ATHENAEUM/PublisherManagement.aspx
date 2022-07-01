@@ -41,6 +41,16 @@
         label, span {
             color: #000000;
         }
+
+        .blink {
+            animation: blinker 1.5s linear infinite;
+        }
+
+        @keyframes blinker {
+            50% {
+                opacity: 0;
+            }
+        }
     </style>
 
     <br />
@@ -91,6 +101,12 @@
                                 </div>
                             </div>
                         </div>
+
+                        <br />
+                        <center>
+                            <asp:Label ID="Label1" CssClass="blink" runat="server" Text="Label" Visible="False"></asp:Label>
+                        </center>
+                        <br />
 
                         <div class="row">
                             <div class="col-4">

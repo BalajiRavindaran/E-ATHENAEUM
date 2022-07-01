@@ -23,7 +23,9 @@ namespace E___ATHENAEUM
         {
             if (checkPublisherExists())
             {
-                Response.Write("<script>alert('Publisher already exist');</script>");
+                Label1.Visible = true;
+                Label1.ForeColor = System.Drawing.Color.Red;
+                Label1.Text = "Publisher already exist";
             }
             else
             {
@@ -39,7 +41,9 @@ namespace E___ATHENAEUM
             }
             else
             {
-                Response.Write("<script>alert('Publisher does not exist');</script>");
+                Label1.Visible = true;
+                Label1.ForeColor = System.Drawing.Color.Red;
+                Label1.Text = "Publisher does not exist";
             }
         }
         // delete
@@ -51,7 +55,9 @@ namespace E___ATHENAEUM
             }
             else
             {
-                Response.Write("<script>alert('Publisher does not exist');</script>");
+                Label1.Visible = true;
+                Label1.ForeColor = System.Drawing.Color.Red;
+                Label1.Text = "Publisher does not exist";
             }
         }
         // go
@@ -79,7 +85,9 @@ namespace E___ATHENAEUM
                 }
                 else
                 {
-                    Response.Write("<script>alert('Invalid publisher ID');</script>");
+                    Label1.Visible = true;
+                    Label1.ForeColor = System.Drawing.Color.Red;
+                    Label1.Text = "Invalid publisher ID";
                 }
             }
             catch (Exception exception)
@@ -103,7 +111,10 @@ namespace E___ATHENAEUM
                 cmd.ExecuteNonQuery();
                 con.Close();
 
-                Response.Write("<script>alert('Publisher deleted Successfully');</script>");
+                Label1.Visible = true;
+                Label1.ForeColor = System.Drawing.Color.Green;
+                Label1.Text = "Publisher deleted Successfully";
+
                 clearForm();
                 GridView1.DataBind();
             }
@@ -117,7 +128,9 @@ namespace E___ATHENAEUM
         {
             if (TextBox2.Text.Trim() == null || TextBox2.Text.Trim() == "")
             {
-                Response.Write("<script>alert('Publisher Name cannot be empty');</script>");
+                Label1.Visible = true;
+                Label1.ForeColor = System.Drawing.Color.Red;
+                Label1.Text = "Publisher Name cannot be empty";
             }
             else
             {
@@ -134,7 +147,9 @@ namespace E___ATHENAEUM
                     cmd.ExecuteNonQuery();
                     con.Close();
 
-                    Response.Write("<script>alert('Publisher Updated Successfully');</script>");
+                    Label1.Visible = true;
+                    Label1.ForeColor = System.Drawing.Color.Green;
+                    Label1.Text = "Publisher Updated Successfully";
                     clearForm();
                     GridView1.DataBind();
                 }
@@ -162,7 +177,10 @@ namespace E___ATHENAEUM
                 cmd.ExecuteNonQuery();
                 con.Close();
 
-                Response.Write("<script>alert('Publisher Added Successfully');</script>");
+                Label1.Visible = true;
+                Label1.ForeColor = System.Drawing.Color.Green;
+                Label1.Text = "Publisher Added Successfully";
+
                 clearForm();
                 GridView1.DataBind();
             }
@@ -216,12 +234,16 @@ namespace E___ATHENAEUM
         {
             if (TextBox1.Text.Trim() == null || TextBox1.Text.Trim() == "")
             {
-                Response.Write("<script>alert('Publisher ID cannot be empty');</script>");
+                Label1.Visible = true;
+                Label1.ForeColor = System.Drawing.Color.Red;
+                Label1.Text = "Publisher ID cannot be empty";
             }
 
             else if (TextBox2.Text.Trim() == null || TextBox2.Text.Trim() == "")
             {
-                Response.Write("<script>alert('Publisher Name cannot be empty');</script>");
+                Label1.Visible = true;
+                Label1.ForeColor = System.Drawing.Color.Red;
+                Label1.Text = "Publisher Name cannot be empty";
             }
 
             else

@@ -23,11 +23,20 @@
             font-weight: normal;
         }
 
-        h3, h4, h5, h6 {
+        h3, h4, h5, h6, label {
             font-size: 2.1vw;
             color: #22bb45;
         }
 
+        .blink {
+            animation: blinker 1.5s linear infinite;
+        }
+
+        @keyframes blinker {
+            50% {
+                opacity: 0;
+            }
+        }
     </style>
 
         <br />
@@ -69,6 +78,9 @@
                                 <div class="form-group">
                                     <asp:TextBox CssClass="form-control" ID="TextBox2" runat="server" placeholder="Password" TextMode="Password"></asp:TextBox>
                                 </div>
+                                <br />
+                                <center><asp:Label CssClass="blink" ID="Label1" runat="server" Text="Label" Visible="False"></asp:Label></center>
+                                <br />
                                 <div class="form-group">
                                     <asp:Button CssClass="btn btn-success btn-block" ID="Button1" runat="server" Text="Login" OnClick="Button1_Click" />
                                 </div>

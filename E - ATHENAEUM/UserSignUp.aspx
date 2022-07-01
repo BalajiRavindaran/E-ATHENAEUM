@@ -33,10 +33,19 @@
             font-size: 1.2vw;
         }
 
-        label, span {
+        label, span, li {
             color: #000000;
         }
 
+        .blink {
+            animation: blinker 1.5s linear infinite;
+        }
+
+        @keyframes blinker {
+            50% {
+                opacity: 0;
+            }
+        }
     </style>
 
     <br />
@@ -198,6 +207,17 @@
                                 </div>
                             </div>
                         </div>
+
+                        <ul CssClass="form-control">
+                            <li>Password must be 8 characters long</li>
+                            <li>Password should contain atleast 1 special characters</li>
+                            <li>Password should contain atleast 1 number</li>
+                        </ul>
+
+                        <center>
+                            <asp:Label ID="Label1" CssClass="blink" runat="server" Text="Label" Visible="False"></asp:Label>
+                        </center>
+                        <br />
 
                         <div class="row">
                             <div class="col">

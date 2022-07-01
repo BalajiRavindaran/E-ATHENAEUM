@@ -1,4 +1,5 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site1.Master" AutoEventWireup="true" CodeBehind="UserLogin.aspx.cs" Inherits="E___ATHENAEUM.UserLogin" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
@@ -8,7 +9,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab&display=swap" rel="stylesheet">
 
     <style>
-
         body {
             margin: 0;
             font-family: "Source Sans Pro", sans-serif;
@@ -24,11 +24,20 @@
             font-weight: normal;
         }
 
-        h3, h4, h5, h6 {
+        h3, h4, h5, h6, label {
             font-size: 2.1vw;
             color: #22bb45;
         }
 
+        .blink {
+            animation: blinker 1.5s linear infinite;
+        }
+
+        @keyframes blinker {
+            50% {
+                opacity: 0;
+            }
+        }
     </style>
 
     <br />
@@ -38,11 +47,11 @@
 
                 <div class="card">
                     <div class="card-body">
-                        
+
                         <div class="row">
                             <div class="col">
                                 <center>
-                                    <img src="images/millennial.png" width="150px"/>
+                                    <img src="images/millennial.png" width="150px" />
                                 </center>
                             </div>
                         </div>
@@ -70,6 +79,10 @@
                                 <div class="form-group">
                                     <asp:TextBox CssClass="form-control" ID="TextBox2" runat="server" placeholder="Password" TextMode="Password"></asp:TextBox>
                                 </div>
+                                <br />
+                                <center>
+                                    <asp:Label ID="Label1" CssClass="blink" runat="server" Text="This is a text" Visible="False"></asp:Label></center>
+                                <br />
                                 <div class="form-group">
                                     <asp:Button CssClass="btn btn-success btn-block" ID="Button1" runat="server" Text="Login" OnClick="Button1_Click" />
                                 </div>
@@ -82,10 +95,11 @@
 
                     </div>
                 </div>
-                
+
                 <br />
-                <a class="btn btn-primary" href="Home.aspx"><i class="fas fa-angle-left"></i> <i class="fa fa-home"></i></a>
-                <br /><br />
+                <a class="btn btn-primary" href="Home.aspx"><i class="fas fa-angle-left"></i><i class="fa fa-home"></i></a>
+                <br />
+                <br />
 
             </div>
         </div>

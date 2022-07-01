@@ -25,17 +25,36 @@ namespace E___ATHENAEUM
         {
             if (checkBookExists())
             {
-                Response.Write("<script>alert('Book Already Exsists');</script>");
+                Label13.Visible = true;
+                Label13.Text = "Book Already Exsists";
+                Label13.ForeColor = System.Drawing.Color.Red;
             }
             else
             {
-                addNewBook();
+                if (validations())
+                {
+                    if (FileUpload1.HasFile == true)
+                    {
+                        addNewBook();
+                    }
+                    else
+                    {
+                        Label13.Visible = true;
+                        Label13.Text = "Upload the necessary file";
+                        Label13.ForeColor = System.Drawing.Color.Red;
+                    }
+                }
+
             }
         }
         // update
         protected void Button1_Click(object sender, EventArgs e)
         {
-            updateBookById();
+            if (validations())
+            {
+                updateBookById();
+            }
+
         }
         // delete
         protected void Button3_Click(object sender, EventArgs e)
@@ -64,7 +83,10 @@ namespace E___ATHENAEUM
                     cmd.ExecuteNonQuery();
                     con.Close();
 
-                    Response.Write("<script>alert('Book deleted Successfully');</script>");
+                    Label13.Visible = true;
+                    Label13.Text = "Book deleted Successfully";
+                    Label13.ForeColor = System.Drawing.Color.Green;
+
                     clearForm();
                     GridView1.DataBind();
                 }
@@ -76,7 +98,9 @@ namespace E___ATHENAEUM
             }
             else
             {
-                Response.Write("<script>alert('Invalid book ID');</script>");
+                Label13.Visible = true;
+                Label13.Text = "Invalid book ID";
+                Label13.ForeColor = System.Drawing.Color.Red;
             }
         }
 
@@ -97,8 +121,9 @@ namespace E___ATHENAEUM
                     {
                         if (actual_stock < global_issued_books)
                         {
-                            Response.Write("<script>alert('Actual Stock value cannot be less than the Issued books');</script>");
-                            return;
+                            Label13.Visible = true;
+                            Label13.Text = "Actual Stock value cannot be less than the Issued books";
+                            Label13.ForeColor = System.Drawing.Color.Red;
                         }
                         else
                         {
@@ -151,7 +176,10 @@ namespace E___ATHENAEUM
                     cmd.ExecuteNonQuery();
                     con.Close();
 
-                    Response.Write("<script>alert('Book Updated Successfully');</script>");
+                    Label13.Visible = true;
+                    Label13.Text = "Book Updated Successfully";
+                    Label13.ForeColor = System.Drawing.Color.Green;
+
                     clearForm();
                     GridView1.DataBind();
                 }
@@ -162,7 +190,9 @@ namespace E___ATHENAEUM
             }
             else
             {
-                Response.Write("<script>alert('Invalid book ID');</script>");
+                Label13.Visible = true;
+                Label13.Text = "Invalid book ID";
+                Label13.ForeColor = System.Drawing.Color.Red;
             }
 
         }
@@ -217,7 +247,9 @@ namespace E___ATHENAEUM
                 }
                 else
                 {
-                    Response.Write("<script>alert('Invalid book ID');</script>");
+                    Label13.Visible = true;
+                    Label13.Text = "Invalid book ID";
+                    Label13.ForeColor = System.Drawing.Color.Red;
                 }
             }
             catch (Exception exception)
@@ -328,7 +360,10 @@ namespace E___ATHENAEUM
 
                 cmd.ExecuteNonQuery();
                 con.Close();
-                Response.Write("<script>alert('Book added successfully');</script>");
+                Label13.Visible = true;
+                Label13.Text = "Book added successfully";
+                Label13.ForeColor = System.Drawing.Color.Green;
+
                 clearForm();
                 GridView1.DataBind();
             }
@@ -353,6 +388,70 @@ namespace E___ATHENAEUM
             TextBox5.Text = "";
             TextBox7.Text = "";
             TextBox6.Text = "";
+        }
+
+        bool validations()
+        {
+            if (TextBox1.Text.Trim() == null || TextBox1.Text.Trim() == "")
+            {
+                Label13.Visible = true;
+                Label13.Text = "Book ID cannot be empty";
+                Label13.ForeColor = System.Drawing.Color.Red;
+                return false;
+            }
+            else if (TextBox2.Text.Trim() == null || TextBox2.Text.Trim() == "")
+            {
+                Label13.Visible = true;
+                Label13.Text = "Book Name cannot be empty";
+                Label13.ForeColor = System.Drawing.Color.Red;
+                return false;
+            }
+            else if (TextBox3.Text.Trim() == null || TextBox3.Text.Trim() == "")
+            {
+                Label13.Visible = true;
+                Label13.Text = "Publish Date cannot be empty";
+                Label13.ForeColor = System.Drawing.Color.Red;
+                return false;
+            }
+            else if (TextBox4.Text.Trim() == null || TextBox4.Text.Trim() == "")
+            {
+                Label13.Visible = true;
+                Label13.Text = "Actual Stock cannot be empty";
+                Label13.ForeColor = System.Drawing.Color.Red;
+                return false;
+            }
+            else if (TextBox6.Text.Trim() == null || TextBox6.Text.Trim() == "")
+            {
+                Label13.Visible = true;
+                Label13.Text = "Book Description cannot be empty";
+                Label13.ForeColor = System.Drawing.Color.Red;
+                return false;
+            }
+            else if (TextBox9.Text.Trim() == null || TextBox9.Text.Trim() == "")
+            {
+                Label13.Visible = true;
+                Label13.Text = "Edition cannot be empty";
+                Label13.ForeColor = System.Drawing.Color.Red;
+                return false;
+            }
+            else if (TextBox10.Text.Trim() == null || TextBox10.Text.Trim() == "")
+            {
+                Label13.Visible = true;
+                Label13.Text = "Book Cost cannot be empty";
+                Label13.ForeColor = System.Drawing.Color.Red;
+                return false;
+            }
+            else if (TextBox11.Text.Trim() == null || TextBox11.Text.Trim() == "")
+            {
+                Label13.Visible = true;
+                Label13.Text = "Pages cannot be empty";
+                Label13.ForeColor = System.Drawing.Color.Red;
+                return false;
+            }
+            else
+            {
+                return true;
+            }
         }
     }
 }

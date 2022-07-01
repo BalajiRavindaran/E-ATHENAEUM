@@ -48,6 +48,7 @@ namespace E___ATHENAEUM
                     LinkButton3.Visible = true; //LogOut
                     LinkButton7.Visible = true; //HelloUser
                     LinkButton7.Text = "Hello Admin";
+                    LinkButton7.Enabled = false;
 
                     LinkButton1.Visible = false; //UserLogin
                     LinkButton2.Visible = false; //UserSignUp

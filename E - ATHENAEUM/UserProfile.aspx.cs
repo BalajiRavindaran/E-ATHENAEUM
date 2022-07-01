@@ -50,7 +50,7 @@ namespace E___ATHENAEUM
             }
             else
             {
-                updateMemberDetails();
+                validation();
                 if (!Page.IsPostBack)
                 {
                     getMemberDetails();
@@ -150,14 +150,18 @@ namespace E___ATHENAEUM
                 con.Close();
                 if (result > 0)
                 {
+                    Label3.Visible = true;
+                    Label3.Text = "Your Details Updated Successfully";
+                    Label3.ForeColor = System.Drawing.Color.Green;
 
-                    Response.Write("<script>alert('Your Details Updated Successfully');</script>");
                     getMemberDetails();
                     getBookById();
                 }
                 else
                 {
-                    Response.Write("<script>alert('Invaid entry');</script>");
+                    Label3.Visible = true;
+                    Label3.Text = "Invaid entry";
+                    Label3.ForeColor = System.Drawing.Color.Red;
                 }
 
             }
@@ -209,6 +213,62 @@ namespace E___ATHENAEUM
             catch (Exception exception)
             {
                 Response.Write("<script>alert('" + exception.Message + "');</script>");
+            }
+        }
+
+        void validation()
+        {
+            if (TextBox1.Text.Trim() == null || TextBox1.Text.Trim() == "")
+            {
+                Label3.Visible = true;
+                Label3.Text = "Full Name cannot be empty";
+                Label3.ForeColor = System.Drawing.Color.Red;
+            }
+            else if (TextBox2.Text.Trim() == null || TextBox2.Text.Trim() == "")
+            {
+                Label3.Visible = true;
+                Label3.Text = "DOB cannot be empty";
+                Label3.ForeColor = System.Drawing.Color.Red;
+            }
+            else if (TextBox3.Text.Trim() == null || TextBox3.Text.Trim() == "")
+            {
+                Label3.Visible = true;
+                Label3.Text = "Contact Number cannot be empty";
+                Label3.ForeColor = System.Drawing.Color.Red;
+            }
+            else if (TextBox4.Text.Trim() == null || TextBox4.Text.Trim() == "")
+            {
+                Label3.Visible = true;
+                Label3.Text = "Email cannot be empty";
+                Label3.ForeColor = System.Drawing.Color.Red;
+            }
+            else if (TextBox5.Text.Trim() == null || TextBox5.Text.Trim() == "")
+            {
+                Label3.Visible = true;
+                Label3.Text = "City cannot be empty";
+                Label3.ForeColor = System.Drawing.Color.Red;
+            }
+            else if (TextBox6.Text.Trim() == null || TextBox6.Text.Trim() == "")
+            {
+                Label3.Visible = true;
+                Label3.Text = "Pincode cannot be empty";
+                Label3.ForeColor = System.Drawing.Color.Red;
+            }
+            else if (TextBox7.Text.Trim() == null || TextBox7.Text.Trim() == "")
+            {
+                Label3.Visible = true;
+                Label3.Text = "Full Address cannot be empty";
+                Label3.ForeColor = System.Drawing.Color.Red;
+            }
+            else if (DropDownList1.SelectedItem.Value == "Select")
+            {
+                Label3.Visible = true;
+                Label3.Text = "Select your appropriate state";
+                Label3.ForeColor = System.Drawing.Color.Red;
+            }
+            else
+            {
+                updateMemberDetails();
             }
         }
     }
