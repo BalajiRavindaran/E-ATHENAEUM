@@ -97,7 +97,7 @@
                 </div>
 
                 <br />
-                <a class="btn btn-primary" href="Home.aspx"><i class="fas fa-angle-left"></i><i class="fa fa-home"></i></a>
+                <a class="btn btn-primary" href="Home.aspx"><i class="fas fa-angle-left"></i> <i class="fa fa-home"></i></a>
                 <br />
                 <br />
 
