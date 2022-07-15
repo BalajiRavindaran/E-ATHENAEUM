@@ -119,6 +119,12 @@ namespace E___ATHENAEUM
                 Label1.Text = "Contact Number cannot be empty";
                 Label1.ForeColor = System.Drawing.Color.Red;
             }
+            else if (TextBox3.Text.Length < 10)
+            {
+                Label1.Visible = true;
+                Label1.Text = "Contact Number Invalid";
+                Label1.ForeColor = System.Drawing.Color.Red;
+            }
             else if (TextBox4.Text.Trim() == null || TextBox4.Text.Trim() == "")
             {
                 Label1.Visible = true;
